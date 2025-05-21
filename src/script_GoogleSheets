@@ -1,0 +1,19 @@
+function doPost(e) {
+  var sheet = SpreadsheetApp.openById("your_link");
+  var data = JSON.parse(e.postData.contents);
+  
+  var timestamp = new Date();
+  var row = [
+    timestamp,
+    data.temperature,
+    data.pressure,
+    data.humidity,
+    data.gas,
+    data.altitude
+  ];
+  
+  var sheetTab = sheet.getSheetByName("Your_Sheet_Name");
+  sheetTab.appendRow(row);
+  
+  return ContentService.createTextOutput("Data added");
+}
